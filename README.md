@@ -20,7 +20,6 @@ ninja -C build
 ninja -C build install
 ```
 
-
 ## Running
 
 Make sure `XDG_CURRENT_DESKTOP` is set and imported into D-Bus.
@@ -47,6 +46,15 @@ xdg-desktop-portal-termfilechooser -r [OPTION...]
 
 To list the available options, you can run `xdg-desktop-portal-termfilechooser
 --help`.
+
+
+## Troubleshooting
+
+If portal is not found after building and installing, `xdg-desktop-portal` is probably looking for portals in different folders than the default ones. Try to build with additional flags like these
+
+```sh
+meson build --prefix /usr --libexecdir lib --sbindir bin
+```
 
 ## License
 

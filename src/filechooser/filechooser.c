@@ -304,20 +304,6 @@ static int method_save_file(sd_bus_message *msg, void *data, sd_bus_error *ret_e
     char *path = malloc(path_size);
     snprintf(path, path_size, "%s/%s", current_folder, current_name);
 
-    bool file_already_exists = true;
-    while (file_already_exists) {
-        if (access(path, F_OK) == 0) {
-            char *path_tmp = malloc(path_size);
-            snprintf(path_tmp, path_size, "%s", path);
-            path_size += 1;
-            path = realloc(path, path_size);
-            snprintf(path, path_size, "%s_", path_tmp);
-            free(path_tmp);
-        } else {
-            file_already_exists = false;
-        }
-    }
-
     char **selected_files = NULL;
     size_t num_selected_files = 0;
     ret = exec_filechooser(data, true, false, false, path, &selected_files, &num_selected_files);
